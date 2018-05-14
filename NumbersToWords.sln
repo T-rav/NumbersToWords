@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersToWords", "NumbersToWords.csproj", "{FD428D20-AB8C-494B-A6EA-EC50556C3F03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersToWords", "NumbersToWords\NumbersToWords.csproj", "{FD428D20-AB8C-494B-A6EA-EC50556C3F03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersToWords.Tests", "..\NumbersToWords.Tests\NumbersToWords.Tests.csproj", "{8A804580-6215-4471-9F59-242C566FE68C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersToWords.Tests", "NumbersToWords.Tests\NumbersToWords.Tests.csproj", "{8A804580-6215-4471-9F59-242C566FE68C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersToWords.Boundry", "NumbersToWords.Boundry\NumbersToWords.Boundry.csproj", "{DD0540CB-2404-4A67-9A0A-AC08BE637579}"
 EndProject

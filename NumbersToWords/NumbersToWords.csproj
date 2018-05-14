@@ -45,7 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="NumbersToWords.Boundry\NumbersToWords.Boundry.csproj">
+    <ProjectReference Include="..\NumbersToWords.Boundry\NumbersToWords.Boundry.csproj">
       <Project>{dd0540cb-2404-4a67-9a0a-ac08be637579}</Project>
       <Name>NumbersToWords.Boundry</Name>
     </ProjectReference>
