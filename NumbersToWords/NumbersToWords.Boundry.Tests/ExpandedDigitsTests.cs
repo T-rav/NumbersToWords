@@ -123,5 +123,39 @@ namespace NumbersToWords.Boundry.Tests
             //---------------Assert-----------------------
             actual.Should().BeFalse();
         }
+
+        [Test]
+        public void CanCompressFourDigitNumberIntoThreeDigitNotation_WhenPossible_ShouldReturnTrue()
+        {
+            //---------------Arrange-------------------
+            var sut = new ExpandedDigits
+            {
+                Thousands = 5,
+                Hundreds = 3,
+                Tens = 0,
+                Units = 0
+            };
+            //---------------Act----------------------
+            var actual = sut.CanCompressFourDigitNumberIntoThreeDigitNotation();
+            //---------------Assert-----------------------
+            actual.Should().BeTrue();
+        }
+
+        [Test]
+        public void CanCompressFourDigitNumberIntoThreeDigitNotation_WhenNotPossible_ShouldReturnFalse()
+        {
+            //---------------Arrange-------------------
+            var sut = new ExpandedDigits
+            {
+                Thousands = 0,
+                Hundreds = 3,
+                Tens = 0,
+                Units = 0
+            };
+            //---------------Act----------------------
+            var actual = sut.CanCompressFourDigitNumberIntoThreeDigitNotation();
+            //---------------Assert-----------------------
+            actual.Should().BeFalse();
+        }
     }
 }

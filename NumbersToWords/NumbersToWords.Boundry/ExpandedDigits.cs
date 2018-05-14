@@ -65,5 +65,10 @@
         {
             return GetTensValue() + Units;
         }
+
+        public bool CanCompressFourDigitNumberIntoThreeDigitNotation()
+        {
+            return Thousands > 0 && Hundreds > 0 && Tens == 0 && Units == 0;
+        }
     }
 }

@@ -109,7 +109,7 @@ namespace NumbersToWords.Tests
         [TestCase(1000, "one thousand")]
         [TestCase(5000, "five thousand")]
         [TestCase(9000, "nine thousand")]
-        public void ConvertToWords_WhenFourDigitNumberDivisibleBy10_ShouldConvert(int input, string expected)
+        public void ConvertToWords_WhenFourDigitNumberDivisibleBy1000WithSingleDigitResult_ShouldConvert(int input, string expected)
         {
             //---------------Arrange-------------------
             var sut = CreateNumberToWordConverter();
@@ -124,6 +124,18 @@ namespace NumbersToWords.Tests
         [TestCase(3020, "three thousand twenty")]
         [TestCase(9999, "nine thousand nine hundred ninety-nine")]
         public void ConvertToWords_WhenFourDigitNumberNotDivisibleBy10_ShouldConvert(int input, string expected)
+        {
+            //---------------Arrange-------------------
+            var sut = CreateNumberToWordConverter();
+            //---------------Act----------------------
+            var actual = sut.ConvertToWords(input);
+            //---------------Assert-----------------------
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(5300, "fifty-three hundred")]
+        [TestCase(2200, "twenty-two hundred")]
+        public void ConvertToWords_WhenFourDigitNumberDivisibleBy1000WithM_ShouldConvert(int input, string expected)
         {
             //---------------Arrange-------------------
             var sut = CreateNumberToWordConverter();

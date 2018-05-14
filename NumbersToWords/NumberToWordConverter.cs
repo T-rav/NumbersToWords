@@ -30,17 +30,29 @@ namespace NumbersToWords
         {
             if (expandedDigits.Thousands == 0) return NumberNotFound;
 
-            return GatSingleDigitNumber(expandedDigits.Thousands) + " thousand ";
+            if (expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
+            {
+                var compressedDigits = new ExpandedDigits {Tens = expandedDigits.Thousands, Units = expandedDigits.Hundreds};
+                var compressionResult = GetTwoDigitNumber(compressedDigits) + GetSingleDigitNumber(compressedDigits.Units);
+                return compressionResult + " hundred";
+            }
+
+            return GetSingleDigitNumber(expandedDigits.Thousands) + " thousand ";
+        }
+
+        private static bool FourDigitNumberCanCompressToThreeDigitNotation(ExpandedDigits expandedDigits)
+        {
+            return expandedDigits.Hundreds > 0 && expandedDigits.Tens == 0 && expandedDigits.Units == 0;
         }
 
         private string GetThreeDigitNumber(ExpandedDigits expandedDigits)
         {
-            if (expandedDigits.Hundreds == 0)
+            if (expandedDigits.Hundreds == 0 || expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
             {
                 return NumberNotFound;
             }
 
-            return GatSingleDigitNumber(expandedDigits.Hundreds) + " hundred ";
+            return GetSingleDigitNumber(expandedDigits.Hundreds) + " hundred ";
         }
 
         private string GetTwoDigitNumber(ExpandedDigits digits)
@@ -92,7 +104,7 @@ namespace NumbersToWords
         {
             if (digits.IsTeenNumber() || MultiDigitNumberEndingWithZero(digits)) return NumberNotFound;
 
-            return GatSingleDigitNumber(digits.Units);
+            return GetSingleDigitNumber(digits.Units);
         }
 
         private bool MultiDigitNumberEndingWithZero(ExpandedDigits digits)
@@ -100,7 +112,7 @@ namespace NumbersToWords
             return !digits.IsSingleDigitNumber() && digits.Units == 0;
         }
 
-        private string GatSingleDigitNumber(int number)
+        private string GetSingleDigitNumber(int number)
         {
             var singleDigitNumbers = new Dictionary<int, string>
             {
