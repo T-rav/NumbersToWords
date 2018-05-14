@@ -2,17 +2,10 @@
 {
     public class ExpandedDigits
     {
-        private readonly int _unexpandedValue;
-
         public int Units { get; set; }
         public int Tens { get; set; }
         public int Hundreds { get; set; }
         public int Thousands { get; set; }
-
-        public ExpandedDigits(int unexpandedValue)
-        {
-            _unexpandedValue = unexpandedValue;
-        }
 
         public int GetTensValue()
         {
@@ -31,7 +24,7 @@
 
         public bool IsCompoundNumber()
         {
-            var canidateNumber = GetTensValue() + Units;
+            var canidateNumber = GetLastTwoDigitsAssembled();
             if (InCompoundRange(canidateNumber) && NotDivisibleBy10(canidateNumber))
             {
                 return true;
@@ -42,7 +35,9 @@
 
         public bool IsTeenNumber()
         {
-            if (_unexpandedValue > 10 && _unexpandedValue < 20)
+            var canidateValue = GetLastTwoDigitsAssembled();
+
+            if (canidateValue > 10 && canidateValue < 20)
             {
                 return true;
             }
@@ -52,7 +47,8 @@
 
         public bool IsSingleDigitNumber()
         {
-            return _unexpandedValue <= 9;
+            var canidateValue = GetThousandsValue() + GetHundredsValue() + GetTensValue() + Units;
+            return canidateValue <= 9;
         }
 
         private bool NotDivisibleBy10(int canidateNumber)
@@ -63,6 +59,11 @@
         private bool InCompoundRange(int canidateNumber)
         {
             return canidateNumber >= 21 && canidateNumber <= 99;
+        }
+        
+        private int GetLastTwoDigitsAssembled()
+        {
+            return GetTensValue() + Units;
         }
     }
 }

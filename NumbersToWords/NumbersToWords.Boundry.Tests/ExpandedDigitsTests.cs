@@ -16,7 +16,7 @@ namespace NumbersToWords.Boundry.Tests
         public void IsCompoundNumber_WhenNot_ShouldReturnFalse(int units, int tens, int hundreds, int unexpandedValue)
         {
             //---------------Arrange-------------------
-            var sut = new ExpandedDigits(unexpandedValue)
+            var sut = new ExpandedDigits
             {
                 Hundreds = hundreds,
                 Tens = tens,
@@ -34,7 +34,7 @@ namespace NumbersToWords.Boundry.Tests
         public void IsCompoundNumber_WhenIs_ShouldReturnTrue(int units, int tens, int hundreds, int unexpandedValue)
         {
             //---------------Arrange-------------------
-            var sut = new ExpandedDigits(unexpandedValue)
+            var sut = new ExpandedDigits
             {
                 Hundreds = hundreds,
                 Tens = tens,
@@ -50,7 +50,7 @@ namespace NumbersToWords.Boundry.Tests
         public void IsTeenNumber_WhenIs10_ShouldReturnFalse()
         {
             //---------------Arrange-------------------
-            var sut = new ExpandedDigits(10)
+            var sut = new ExpandedDigits
             {
                 Tens = 1,
                 Units = 0
@@ -67,7 +67,7 @@ namespace NumbersToWords.Boundry.Tests
         public void IsTeenNumber_WhenIs11Through19_ShouldReturnTrue(int tens, int units, int unexpandedValue)
         {
             //---------------Arrange-------------------
-            var sut = new ExpandedDigits(unexpandedValue)
+            var sut = new ExpandedDigits
             {
                 Tens = tens,
                 Units = units
@@ -82,7 +82,7 @@ namespace NumbersToWords.Boundry.Tests
         public void IsTeenNumber_WhenIs20_ShouldReturnFalse()
         {
             //---------------Arrange-------------------
-            var sut = new ExpandedDigits(20)
+            var sut = new ExpandedDigits
             {
                 Tens = 2,
                 Units = 0
@@ -99,7 +99,7 @@ namespace NumbersToWords.Boundry.Tests
         public void IsSingleDigitNumber_When0Through9_ShouldReturnTrue(int units)
         {
             //---------------Arrange-------------------
-            var sut = new ExpandedDigits(units)
+            var sut = new ExpandedDigits
             {
                 Units = units
             };
@@ -113,7 +113,7 @@ namespace NumbersToWords.Boundry.Tests
         public void IsSingleDigitNumber_WhenIs10_ShouldReturnFalse()
         {
             //---------------Arrange-------------------
-            var sut = new ExpandedDigits(10)
+            var sut = new ExpandedDigits
             {
                 Tens = 1,
                 Units = 0

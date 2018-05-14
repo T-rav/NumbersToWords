@@ -19,7 +19,7 @@ namespace NumbersToWords
 
             var units = leftOverValue - tensDigitValue;
 
-            return new ExpandedDigits(input)
+            return new ExpandedDigits
             {
                 Units = units,
                 Tens = tensDigit,

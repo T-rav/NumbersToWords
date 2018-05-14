@@ -120,6 +120,7 @@ namespace NumbersToWords.Tests
         }
 
         [TestCase(1001, "one thousand one")]
+        [TestCase(2013, "two thousand thirteen")]
         [TestCase(3020, "three thousand twenty")]
         [TestCase(9999, "nine thousand nine hundred ninety-nine")]
         public void ConvertToWords_WhenFourDigitNumberNotDivisibleBy10_ShouldConvert(int input, string expected)

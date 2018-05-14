@@ -16,7 +16,7 @@ namespace NumbersToWords.Tests
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
-            var expected = new ExpandedDigits(input)
+            var expected = new ExpandedDigits
             {
                 Units = 5
             };
@@ -32,7 +32,7 @@ namespace NumbersToWords.Tests
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
-            var expected = new ExpandedDigits(input)
+            var expected = new ExpandedDigits
             {
                 Units = 9,
                 Tens = 3
@@ -49,7 +49,7 @@ namespace NumbersToWords.Tests
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
-            var expected = new ExpandedDigits(input)
+            var expected = new ExpandedDigits
             {
                 Units = 0,
                 Tens = 7,
@@ -67,7 +67,7 @@ namespace NumbersToWords.Tests
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
-            var expected = new ExpandedDigits(input)
+            var expected = new ExpandedDigits
             {
                 Units = 3,
                 Tens = 2,
