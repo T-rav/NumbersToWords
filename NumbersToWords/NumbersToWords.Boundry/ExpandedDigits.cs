@@ -51,6 +51,11 @@
             return canidateValue <= 9;
         }
 
+        public bool CanCompressFourDigitNumberIntoThreeDigitNotation()
+        {
+            return Thousands > 0 && Hundreds > 0 && Tens == 0 && Units == 0;
+        }
+
         private bool NotDivisibleBy10(int canidateNumber)
         {
             return canidateNumber % 10 != 0;
@@ -64,11 +69,6 @@
         private int GetLastTwoDigitsAssembled()
         {
             return GetTensValue() + Units;
-        }
-
-        public bool CanCompressFourDigitNumberIntoThreeDigitNotation()
-        {
-            return Thousands > 0 && Hundreds > 0 && Tens == 0 && Units == 0;
         }
     }
 }

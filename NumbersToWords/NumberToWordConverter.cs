@@ -18,47 +18,52 @@ namespace NumbersToWords
         {
             var expandedDigits = _digitExpandor.Expand(number);
 
-            var result = GetFourDigitNumber(expandedDigits) 
-                         + GetThreeDigitNumber(expandedDigits) 
-                         + GetTwoDigitNumber(expandedDigits) 
-                         + GetGatedSingleDigitNumber(expandedDigits);
+            var result = GetThousandsWord(expandedDigits) 
+                         + GetHundredsWord(expandedDigits) 
+                         + GetTensWord(expandedDigits) 
+                         + GetGatedUnitWord(expandedDigits);
 
             return result.Trim();
         }
 
-        private string GetFourDigitNumber(ExpandedDigits expandedDigits)
+        private string GetThousandsWord(ExpandedDigits expandedDigits)
         {
             if (expandedDigits.Thousands == 0) return NumberNotFound;
 
             if (expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
             {
                 var compressedDigits = new ExpandedDigits {Tens = expandedDigits.Thousands, Units = expandedDigits.Hundreds};
-                var compressionResult = GetTwoDigitNumber(compressedDigits) + GetSingleDigitNumber(compressedDigits.Units);
+                var compressionResult = GetTensWord(compressedDigits) + GetUnitsWord(compressedDigits.Units);
                 return compressionResult + " hundred";
             }
 
-            return GetSingleDigitNumber(expandedDigits.Thousands) + " thousand ";
+            return GetUnitsWord(expandedDigits.Thousands) + " thousand ";
         }
 
-        private static bool FourDigitNumberCanCompressToThreeDigitNotation(ExpandedDigits expandedDigits)
-        {
-            return expandedDigits.Hundreds > 0 && expandedDigits.Tens == 0 && expandedDigits.Units == 0;
-        }
-
-        private string GetThreeDigitNumber(ExpandedDigits expandedDigits)
+        private string GetHundredsWord(ExpandedDigits expandedDigits)
         {
             if (expandedDigits.Hundreds == 0 || expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
             {
                 return NumberNotFound;
             }
 
-            return GetSingleDigitNumber(expandedDigits.Hundreds) + " hundred ";
+            return GetUnitsWord(expandedDigits.Hundreds) + " hundred ";
         }
 
-        private string GetTwoDigitNumber(ExpandedDigits digits)
+        private string GetTensWord(ExpandedDigits digits)
         {
             if (digits.Tens == 0) return NumberNotFound;
 
+            if (digits.IsTeenNumber())
+            {
+                return GetTeenNumberWord(digits);
+            }
+
+            return GetTensDigitWord(digits);
+        }
+
+        private string GetTensDigitWord(ExpandedDigits digits)
+        {
             var tens = new Dictionary<int, string>
             {
                 {10, "ten"},
@@ -72,6 +77,12 @@ namespace NumbersToWords
                 {90, "ninety"},
             };
 
+            var lookup = digits.GetTensValue();
+            return digits.IsCompoundNumber() ? $"{tens[lookup]}-" : tens[lookup];
+        }
+
+        private string GetTeenNumberWord(ExpandedDigits digits)
+        {
             var teens = new Dictionary<int, string>
             {
                 {11, "eleven"},
@@ -85,14 +96,8 @@ namespace NumbersToWords
                 {19, "nineteen"},
             };
 
-            if (digits.IsTeenNumber())
-            {
-                var teenNumber = ReassemblyTeenNumber(digits);
-                return teens[teenNumber];
-            }
-
-            var lookup = digits.GetTensValue();
-            return digits.IsCompoundNumber() ? $"{tens[lookup]}-" : tens[lookup];
+            var teenNumber = ReassemblyTeenNumber(digits);
+            return teens[teenNumber];
         }
 
         private int ReassemblyTeenNumber(ExpandedDigits digits)
@@ -100,11 +105,11 @@ namespace NumbersToWords
             return digits.GetTensValue() + digits.Units;
         }
 
-        private string GetGatedSingleDigitNumber(ExpandedDigits digits)
+        private string GetGatedUnitWord(ExpandedDigits digits)
         {
             if (digits.IsTeenNumber() || MultiDigitNumberEndingWithZero(digits)) return NumberNotFound;
 
-            return GetSingleDigitNumber(digits.Units);
+            return GetUnitsWord(digits.Units);
         }
 
         private bool MultiDigitNumberEndingWithZero(ExpandedDigits digits)
@@ -112,7 +117,7 @@ namespace NumbersToWords
             return !digits.IsSingleDigitNumber() && digits.Units == 0;
         }
 
-        private string GetSingleDigitNumber(int number)
+        private string GetUnitsWord(int number)
         {
             var singleDigitNumbers = new Dictionary<int, string>
             {

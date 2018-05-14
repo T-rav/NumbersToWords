@@ -12,7 +12,7 @@ namespace NumbersToWords.Tests
         {
             //---------------Arrange-------------------
             var input = 5;
-            var sut = new DigitExpandor();
+            var sut = CreateDigitExpandor();
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
@@ -28,7 +28,7 @@ namespace NumbersToWords.Tests
         {
             //---------------Arrange-------------------
             var input = 39;
-            var sut = new DigitExpandor();
+            var sut = CreateDigitExpandor();
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
@@ -45,7 +45,7 @@ namespace NumbersToWords.Tests
         {
             //---------------Arrange-------------------
             var input = 270;
-            var sut = new DigitExpandor();
+            var sut = CreateDigitExpandor();
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
@@ -63,7 +63,7 @@ namespace NumbersToWords.Tests
         {
             //---------------Arrange-------------------
             var input = 5023;
-            var sut = new DigitExpandor();
+            var sut = CreateDigitExpandor();
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
@@ -82,7 +82,7 @@ namespace NumbersToWords.Tests
         {
             //---------------Arrange-------------------
             var input = 35;
-            var sut = new DigitExpandor();
+            var sut = CreateDigitExpandor();
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
@@ -95,7 +95,7 @@ namespace NumbersToWords.Tests
         {
             //---------------Arrange-------------------
             var input = 823;
-            var sut = new DigitExpandor();
+            var sut = CreateDigitExpandor();
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
@@ -108,12 +108,18 @@ namespace NumbersToWords.Tests
         {
             //---------------Arrange-------------------
             var input = 4852;
-            var sut = new DigitExpandor();
+            var sut = CreateDigitExpandor();
             //---------------Act----------------------
             var actual = sut.Expand(input);
             //---------------Assert-----------------------
             var expected = 4000;
             actual.GetThousandsValue().Should().Be(expected);
+        }
+
+        private static DigitExpandor CreateDigitExpandor()
+        {
+            var sut = new DigitExpandor();
+            return sut;
         }
     }
 }

@@ -12,8 +12,8 @@ namespace NumbersToWords
 
             var hundredsDigit = leftOverValue / 100;
             var hundredsDigitValue = hundredsDigit * 100;
-
             leftOverValue = (leftOverValue - hundredsDigitValue);
+
             var tensDigit =  leftOverValue / 10;
             var tensDigitValue = tensDigit * 10;
 
