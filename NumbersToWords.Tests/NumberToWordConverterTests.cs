@@ -93,6 +93,44 @@ namespace NumbersToWords.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(101, "one hundred one")]
+        [TestCase(420, "four hundred twenty")]
+        [TestCase(877, "eight hundred seventy-seven")]
+        public void ConvertToWords_WhenThreeDigitNumberNotDivisibleBy10_ShouldConvert(int input, string expected)
+        {
+            //---------------Arrange-------------------
+            var sut = CreateNumberToWordConverter();
+            //---------------Act----------------------
+            var actual = sut.ConvertToWords(input);
+            //---------------Assert-----------------------
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(1000, "one thousand")]
+        [TestCase(5000, "five thousand")]
+        [TestCase(9000, "nine thousand")]
+        public void ConvertToWords_WhenFourDigitNumberDivisibleBy10_ShouldConvert(int input, string expected)
+        {
+            //---------------Arrange-------------------
+            var sut = CreateNumberToWordConverter();
+            //---------------Act----------------------
+            var actual = sut.ConvertToWords(input);
+            //---------------Assert-----------------------
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(1001, "one thousand one")]
+        [TestCase(3020, "three thousand twenty")]
+        [TestCase(9999, "nine thousand nine hundred ninety-nine")]
+        public void ConvertToWords_WhenFourDigitNumberNotDivisibleBy10_ShouldConvert(int input, string expected)
+        {
+            //---------------Arrange-------------------
+            var sut = CreateNumberToWordConverter();
+            //---------------Act----------------------
+            var actual = sut.ConvertToWords(input);
+            //---------------Assert-----------------------
+            Assert.AreEqual(expected, actual);
+        }
 
         private static NumberToWordConverter CreateNumberToWordConverter()
         {
@@ -100,6 +138,5 @@ namespace NumbersToWords.Tests
             var sut = new NumberToWordConverter(digitExpandor);
             return sut;
         }
-
     }
 }

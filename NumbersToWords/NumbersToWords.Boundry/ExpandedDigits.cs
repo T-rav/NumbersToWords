@@ -31,32 +31,13 @@
 
         public bool IsCompoundNumber()
         {
-            if (NumberInCompundRange() && NumberNotDivisibleBy10())
+            var canidateNumber = GetTensValue() + Units;
+            if (InCompoundRange(canidateNumber) && NotDivisibleBy10(canidateNumber))
             {
                 return true;
             }
 
             return false;
-        }
-
-        private bool NumberNotDivisibleBy10()
-        {
-            return _unexpandedValue % 10 != 0;
-        }
-
-        private bool NumberInCompundRange()
-        {
-            return InCompoundRange() && NotDivisibleBy10();
-        }
-
-        private bool NotDivisibleBy10()
-        {
-            return _unexpandedValue % 10 != 0;
-        }
-
-        private bool InCompoundRange()
-        {
-            return _unexpandedValue >= 21 && _unexpandedValue <= 99;
         }
 
         public bool IsTeenNumber()
@@ -72,6 +53,16 @@
         public bool IsSingleDigitNumber()
         {
             return _unexpandedValue <= 9;
+        }
+
+        private bool NotDivisibleBy10(int canidateNumber)
+        {
+            return canidateNumber % 10 != 0;
+        }
+
+        private bool InCompoundRange(int canidateNumber)
+        {
+            return canidateNumber >= 21 && canidateNumber <= 99;
         }
     }
 }

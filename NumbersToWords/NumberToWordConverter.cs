@@ -18,21 +18,32 @@ namespace NumbersToWords
         {
             var expandedDigits = _digitExpandor.Expand(number);
 
-            return GetTripleDigitNumber(expandedDigits) + GetDoubleDigitNumber(expandedDigits) 
-                   + GetGatedSingleDigitNumber(expandedDigits);
+            var result = GetFourDigitNumber(expandedDigits) 
+                         + GetThreeDigitNumber(expandedDigits) 
+                         + GetTwoDigitNumber(expandedDigits) 
+                         + GetGatedSingleDigitNumber(expandedDigits);
+
+            return result.Trim();
         }
 
-        private string GetTripleDigitNumber(ExpandedDigits expandedDigits)
+        private string GetFourDigitNumber(ExpandedDigits expandedDigits)
+        {
+            if (expandedDigits.Thousands == 0) return NumberNotFound;
+
+            return GatSingleDigitNumber(expandedDigits.Thousands) + " thousand ";
+        }
+
+        private string GetThreeDigitNumber(ExpandedDigits expandedDigits)
         {
             if (expandedDigits.Hundreds == 0)
             {
                 return NumberNotFound;
             }
 
-            return GatedSingleDigitNumber(expandedDigits.Hundreds) + " hundred";
+            return GatSingleDigitNumber(expandedDigits.Hundreds) + " hundred ";
         }
 
-        private string GetDoubleDigitNumber(ExpandedDigits digits)
+        private string GetTwoDigitNumber(ExpandedDigits digits)
         {
             if (digits.Tens == 0) return NumberNotFound;
 
@@ -79,17 +90,17 @@ namespace NumbersToWords
 
         private string GetGatedSingleDigitNumber(ExpandedDigits digits)
         {
-            if (digits.IsTeenNumber() || IsEvenlyDivisibleBy10(digits)) return NumberNotFound;
+            if (digits.IsTeenNumber() || MultiDigitNumberEndingWithZero(digits)) return NumberNotFound;
 
-            return GatedSingleDigitNumber(digits.Units);
+            return GatSingleDigitNumber(digits.Units);
         }
 
-        private bool IsEvenlyDivisibleBy10(ExpandedDigits digits)
+        private bool MultiDigitNumberEndingWithZero(ExpandedDigits digits)
         {
             return !digits.IsSingleDigitNumber() && digits.Units == 0;
         }
 
-        private string GatedSingleDigitNumber(int number)
+        private string GatSingleDigitNumber(int number)
         {
             var singleDigitNumbers = new Dictionary<int, string>
             {

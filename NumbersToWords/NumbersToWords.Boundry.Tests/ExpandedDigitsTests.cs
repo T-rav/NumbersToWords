@@ -28,9 +28,9 @@ namespace NumbersToWords.Boundry.Tests
             actual.Should().BeFalse();
         }
 
-        [TestCase(0, 2, 1, 21)]
-        [TestCase(0, 7, 5, 75)]
-        [TestCase(0, 9, 9, 99)]
+        [TestCase(1, 2, 0, 21)]
+        [TestCase(5, 7, 0, 75)]
+        [TestCase(9, 9, 0, 99)]
         public void IsCompoundNumber_WhenIs_ShouldReturnTrue(int units, int tens, int hundreds, int unexpandedValue)
         {
             //---------------Arrange-------------------
