@@ -11,9 +11,9 @@ namespace NumbersToWords.Boundry.Tests
     [TestFixture]
     public class ExpandedDigitsTests
     {
-        [TestCase(0,0,1,100)]
-        [TestCase(0,2,0,20)]
-        public void IsCompoundNumber_WhenNot_ShouldReturnFalse(int units, int tens, int hundreds, int unexpandedValue)
+        [TestCase(0,0,1)]
+        [TestCase(0,2,0)]
+        public void IsCompoundNumber_WhenNot_ShouldReturnFalse(int units, int tens, int hundreds)
         {
             //---------------Arrange-------------------
             var sut = new ExpandedDigits
@@ -28,10 +28,10 @@ namespace NumbersToWords.Boundry.Tests
             actual.Should().BeFalse();
         }
 
-        [TestCase(1, 2, 0, 21)]
-        [TestCase(5, 7, 0, 75)]
-        [TestCase(9, 9, 0, 99)]
-        public void IsCompoundNumber_WhenIs_ShouldReturnTrue(int units, int tens, int hundreds, int unexpandedValue)
+        [TestCase(1, 2, 0)]
+        [TestCase(5, 7, 0)]
+        [TestCase(9, 9, 0)]
+        public void IsCompoundNumber_WhenIs_ShouldReturnTrue(int units, int tens, int hundreds)
         {
             //---------------Arrange-------------------
             var sut = new ExpandedDigits
@@ -61,10 +61,10 @@ namespace NumbersToWords.Boundry.Tests
             actual.Should().BeFalse();
         }
 
-        [TestCase(1, 1, 11)]
-        [TestCase(1, 4, 14)]
-        [TestCase(1, 9, 19)]
-        public void IsTeenNumber_WhenIs11Through19_ShouldReturnTrue(int tens, int units, int unexpandedValue)
+        [TestCase(1, 1)]
+        [TestCase(1, 4)]
+        [TestCase(1, 9)]
+        public void IsTeenNumber_WhenIs11Through19_ShouldReturnTrue(int tens, int units)
         {
             //---------------Arrange-------------------
             var sut = new ExpandedDigits

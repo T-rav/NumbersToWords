@@ -24,7 +24,7 @@
 
         public bool IsCompoundNumber()
         {
-            var canidateNumber = GetLastTwoDigitsAssembled();
+            var canidateNumber = ResassembleLastTwoDigits();
             if (InCompoundRange(canidateNumber) && NotDivisibleBy10(canidateNumber))
             {
                 return true;
@@ -35,9 +35,9 @@
 
         public bool IsTeenNumber()
         {
-            var canidateValue = GetLastTwoDigitsAssembled();
+            var canidateValue = ResassembleLastTwoDigits();
 
-            if (canidateValue > 10 && canidateValue < 20)
+            if (InTeenRange(canidateValue))
             {
                 return true;
             }
@@ -45,10 +45,20 @@
             return false;
         }
 
+        private static bool InTeenRange(int canidateValue)
+        {
+            return canidateValue > 10 && canidateValue < 20;
+        }
+
         public bool IsSingleDigitNumber()
         {
-            var canidateValue = GetThousandsValue() + GetHundredsValue() + GetTensValue() + Units;
+            var canidateValue = ReassembleEntireNumber();
             return canidateValue <= 9;
+        }
+
+        private int ReassembleEntireNumber()
+        {
+            return GetThousandsValue() + GetHundredsValue() + GetTensValue() + Units;
         }
 
         public bool CanCompressFourDigitNumberIntoThreeDigitNotation()
@@ -66,7 +76,7 @@
             return canidateNumber >= 21 && canidateNumber <= 99;
         }
         
-        private int GetLastTwoDigitsAssembled()
+        private int ResassembleLastTwoDigits()
         {
             return GetTensValue() + Units;
         }
