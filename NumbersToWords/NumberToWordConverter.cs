@@ -28,13 +28,9 @@ namespace NumbersToWords
 
         private string GetThousandsWord(ExpandedDigits expandedDigits)
         {
-            if (expandedDigits.Thousands == 0) return NumberNotFound;
-
-            if (expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
+            if (expandedDigits.Thousands == 0 || expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
             {
-                var compressedDigits = new ExpandedDigits {Tens = expandedDigits.Thousands, Units = expandedDigits.Hundreds};
-                var compressionResult = GetTensWord(compressedDigits) + GetUnitsWord(compressedDigits.Units);
-                return compressionResult + " hundred";
+                return NumberNotFound;
             }
 
             return GetUnitsWord(expandedDigits.Thousands) + " thousand ";
@@ -42,9 +38,16 @@ namespace NumbersToWords
 
         private string GetHundredsWord(ExpandedDigits expandedDigits)
         {
-            if (expandedDigits.Hundreds == 0 || expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
+            if (expandedDigits.Hundreds == 0)
             {
                 return NumberNotFound;
+            }
+
+            if (expandedDigits.CanCompressFourDigitNumberIntoThreeDigitNotation())
+            {
+                var compressedDigits = new ExpandedDigits { Tens = expandedDigits.Thousands, Units = expandedDigits.Hundreds };
+                var compressionResult = GetTensWord(compressedDigits) + GetUnitsWord(compressedDigits.Units);
+                return compressionResult + " hundred";
             }
 
             return GetUnitsWord(expandedDigits.Hundreds) + " hundred ";
